@@ -102,7 +102,7 @@ class NodeViewer(QtWidgets.QGraphicsView):
         )))
         text_color.setAlpha(50)
         self._cursor_text = QtWidgets.QGraphicsTextItem()
-        self._cursor_text.setFlag(self._cursor_text.ItemIsSelectable, False)
+        self._cursor_text.setFlag(QtWidgets.QGraphicsItem.ItemIsSelectable, False)
         self._cursor_text.setDefaultTextColor(text_color)
         self._cursor_text.setZValue(Z_VAL_PIPE - 1)
         font = self._cursor_text.font()
@@ -616,7 +616,7 @@ class NodeViewer(QtWidgets.QGraphicsView):
                 path.addRect(map_rect)
                 self._rubber_band.setGeometry(rect)
                 self.scene().setSelectionArea(
-                    path, QtCore.Qt.IntersectsItemShape
+                    path, mode=QtCore.Qt.IntersectsItemShape
                 )
                 self.scene().update(map_rect)
 
@@ -667,10 +667,10 @@ class NodeViewer(QtWidgets.QGraphicsView):
             delta = event.angleDelta().y()
             if delta == 0:
                 delta = event.angleDelta().x()
-        self._set_viewer_zoom(delta, pos=event.pos())
+        self._set_viewer_zoom(delta, pos=event.position().toPoint())
 
     def dropEvent(self, event):
-        pos = self.mapToScene(event.pos())
+        pos = self.mapToScene(event.position())
         event.setDropAction(QtCore.Qt.CopyAction)
         self.data_dropped.emit(
             event.mimeData(), QtCore.QPoint(pos.x(), pos.y()))

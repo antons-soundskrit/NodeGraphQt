@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from Qt import QtCore, QtWidgets
+from Qt import QtCore, QtGui, QtWidgets
 
 from NodeGraphQt.constants import ViewerEnum
 
@@ -81,7 +81,7 @@ class BaseMenu(QtWidgets.QMenu):
         return menus
 
 
-class GraphAction(QtWidgets.QAction):
+class GraphAction(QtGui.QAction):
 
     executed = QtCore.Signal(object)
 

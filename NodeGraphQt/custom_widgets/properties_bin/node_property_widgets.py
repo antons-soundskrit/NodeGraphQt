@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from collections import defaultdict
 
-from Qt import QtWidgets, QtCore, QtGui, QtCompat
+from Qt import QtWidgets, QtCore, QtGui#, QtCompat
 
 from .node_property_factory import NodePropertyWidgetFactory
 from .prop_widgets_base import PropLineEdit
@@ -54,10 +54,11 @@ class _PropertiesList(QtWidgets.QTableWidget):
         self.verticalHeader().hide()
         self.horizontalHeader().hide()
 
-        QtCompat.QHeaderView.setSectionResizeMode(
-            self.verticalHeader(), QtWidgets.QHeaderView.ResizeToContents)
-        QtCompat.QHeaderView.setSectionResizeMode(
-            self.horizontalHeader(), 0, QtWidgets.QHeaderView.Stretch)
+        # TODO
+        # QtCompat.QHeaderView.setSectionResizeMode(
+        #     self.verticalHeader(), QtWidgets.QHeaderView.ResizeToContents)
+        # QtCompat.QHeaderView.setSectionResizeMode(
+        #     self.horizontalHeader(), 0, QtWidgets.QHeaderView.Stretch)
         self.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
 
     def wheelEvent(self, event):

@@ -5,7 +5,7 @@ import json
 import os
 import re
 
-from Qt import QtCore, QtWidgets
+from Qt import QtCore, QtWidgets, QtGui
 
 from NodeGraphQt.base.commands import (NodeAddedCmd,
                                        NodeRemovedCmd,
@@ -149,7 +149,7 @@ class NodeGraph(QtCore.QObject):
             kwargs.get('node_factory') or NodeFactory())
         self._undo_view = None
         self._undo_stack = (
-            kwargs.get('undo_stack') or QtWidgets.QUndoStack(self)
+            kwargs.get('undo_stack') or QtGui.QUndoStack(self)
         )
         self._widget = None
         self._sub_graphs = {}
@@ -502,11 +502,12 @@ class NodeGraph(QtCore.QObject):
             self._widget.addTab(self._viewer, 'Node Graph')
             # hide the close button on the first tab.
             tab_bar = self._widget.tabBar()
-            for btn_flag in [tab_bar.RightSide, tab_bar.LeftSide]:
-                tab_btn = tab_bar.tabButton(0, btn_flag)
-                if tab_btn:
-                    tab_btn.deleteLater()
-                    tab_bar.setTabButton(0, btn_flag, None)
+            # TODO
+            # for btn_flag in [tab_bar.RightSide, tab_bar.LeftSide]:
+            #     tab_btn = tab_bar.tabButton(0, btn_flag)
+            #     if tab_btn:
+            #         tab_btn.deleteLater()
+            #         tab_bar.setTabButton(0, btn_flag, None)
             self._widget.tabCloseRequested.connect(
                 self._on_close_sub_graph_tab
             )
